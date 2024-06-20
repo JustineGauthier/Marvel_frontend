@@ -1,4 +1,4 @@
-const SearchBar = ({ search, setSearch }) => {
+const SearchBar = ({ search, setSearch, setPage }) => {
   return (
     <input
       type="text"
@@ -6,6 +6,7 @@ const SearchBar = ({ search, setSearch }) => {
       value={search}
       onChange={(event) => {
         setSearch(event.target.value);
+        setPage(1);
       }}
     />
   );

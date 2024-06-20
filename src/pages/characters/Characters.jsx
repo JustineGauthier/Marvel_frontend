@@ -4,10 +4,9 @@ import { Link } from "react-router-dom";
 import Paging from "../../utils/Paging";
 import "./characters.css";
 
-const Characters = ({ search }) => {
+const Characters = ({ search, setPage, page }) => {
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
-  const [page, setPage] = useState(1);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -16,9 +15,8 @@ const Characters = ({ search }) => {
           //   `https://site--backend-leboncoincoin--nksmjkmnbqhd.code.run/characters`
           `http://localhost:3000/characters?name=${search}&page=${page}`
         );
-        console.log(response.data);
+        // console.log(response.data);
         setData(response.data);
-        setPage(response.data.pageNumber);
         setIsLoading(false);
       } catch (error) {
         console.log(error);

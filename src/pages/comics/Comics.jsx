@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import Paging from "../../utils/Paging";
 import "./comics.css";
 
-const Comics = ({ search }) => {
+const Comics = ({ search, setPage, page }) => {
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
 
@@ -12,7 +13,7 @@ const Comics = ({ search }) => {
       try {
         const response = await axios.get(
           //   `https://site--backend-leboncoincoin--nksmjkmnbqhd.code.run/comics`
-          `http://localhost:3000/comics?title=${search}`
+          `http://localhost:3000/comics?title=${search}&page=${page}`
         );
         // console.log(response.data);
         setData(response.data);
@@ -22,14 +23,14 @@ const Comics = ({ search }) => {
       }
     };
     fetchData();
-  }, [search]);
+  }, [search, page]);
 
   return isLoading ? (
     <p>Loading</p>
   ) : (
     <main>
       <div className="comics-container">
-        {data.map((comic) => {
+        {data.paginatedComics.map((comic) => {
           return (
             <Link to={`/comics/${comic._id}`} key={comic._id}>
               <div>
@@ -44,6 +45,11 @@ const Comics = ({ search }) => {
           );
         })}
       </div>
+      <Paging
+        page={data.pageNumber}
+        totalPages={data.totalPages}
+        setPage={setPage}
+      ></Paging>
     </main>
   );
 };
