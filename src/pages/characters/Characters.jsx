@@ -1,10 +1,18 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import SearchBar from "../../utils/SearchBar";
 import Paging from "../../utils/Paging";
 import "./characters.css";
 
-const Characters = ({ search, setPage, page }) => {
+const Characters = ({
+  search,
+  setSearch,
+  page,
+  setPage,
+  favoritesCharactersCookie,
+  handleFavoriteToggle,
+}) => {
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
 
@@ -29,19 +37,32 @@ const Characters = ({ search, setPage, page }) => {
     <p>Loading</p>
   ) : (
     <main>
+      <SearchBar search={search} setSearch={setSearch} setPage={setPage} />
       <div className="characters-container">
         {data.paginatedCharacters.map((character) => {
           return (
-            <Link to={`/characters/${character._id}`} key={character._id}>
-              <div>
+            <div key={character._id}>
+              <i
+                className={
+                  favoritesCharactersCookie.some(
+                    (item) => item._id === character._id
+                  )
+                    ? "fas fa-heart"
+                    : "far fa-heart"
+                }
+                onClick={() => {
+                  handleFavoriteToggle(character, "favoritesCharactersCookie");
+                }}
+              ></i>
+              <Link to={`/characters/${character._id}`}>
                 <img
                   src={`${character.thumbnail.path}/portrait_uncanny.${character.thumbnail.extension}`}
                   alt={`${character.name} image`}
                 />
                 <h2>{character.name}</h2>
                 <p>{character.description}</p>
-              </div>
-            </Link>
+              </Link>
+            </div>
           );
         })}
       </div>

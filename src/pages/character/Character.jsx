@@ -4,7 +4,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import "./character.css";
 
-const Character = () => {
+const Character = ({ favoritesCharactersCookie, handleFavoriteToggle }) => {
   const { id } = useParams();
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
@@ -32,6 +32,16 @@ const Character = () => {
     <main>
       <div className="character-container">
         <div>
+          <i
+            className={
+              favoritesCharactersCookie.some((item) => item._id === data._id)
+                ? "fas fa-heart"
+                : "far fa-heart"
+            }
+            onClick={() => {
+              handleFavoriteToggle(data, "favoritesCharactersCookie");
+            }}
+          ></i>
           <img
             src={`${data.thumbnail.path}/portrait_uncanny.${data.thumbnail.extension}`}
             alt={`${data.name} image`}

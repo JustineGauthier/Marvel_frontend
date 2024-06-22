@@ -1,15 +1,14 @@
 import { Link } from "react-router-dom";
-import SearchBar from "../../utils/SearchBar";
 
 import "./header.css";
 
-const Header = ({ search, setSearch, setPage }) => {
+const Header = ({ setSearch, setPage }) => {
   return (
     <div className="navBar">
       <Link to="/">
         <img src="/img/marvel-logo.svg" alt="Marvel logo" />
       </Link>
-      <SearchBar search={search} setSearch={setSearch} setPage={setPage} />
+
       <Link
         to="/"
         onClick={() => {
