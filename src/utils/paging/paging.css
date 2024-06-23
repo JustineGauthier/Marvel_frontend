@@ -1,0 +1,15 @@
+.pagings-container {
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  margin-bottom: 40px;
+  gap: 10px;
+  i:hover {
+    color: white;
+  }
+}
+
+.hide-icon {
+  visibility: hidden;
+  pointer-events: none;
+}
