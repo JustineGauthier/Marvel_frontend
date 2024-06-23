@@ -13,8 +13,8 @@ const Comic = ({ favoritesComicsCookie, handleFavoriteToggle }) => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          //   "https://site--backend-leboncoincoin--nksmjkmnbqhd.code.run/offers"
-          `http://localhost:3000/comics/${id}`
+          `https://site--marvel-backend--nksmjkmnbqhd.code.run/comics/${id}`
+          // `http://localhost:3000/comics/${id}`
         );
         // console.log(response.data);
         setData(response.data);

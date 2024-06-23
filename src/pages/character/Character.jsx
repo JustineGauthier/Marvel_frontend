@@ -14,8 +14,8 @@ const Character = ({ favoritesCharactersCookie, handleFavoriteToggle }) => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          //   "https://site--backend-leboncoincoin--nksmjkmnbqhd.code.run/offers"
-          `http://localhost:3000/comics/character/${id}`
+          `https://site--marvel-backend--nksmjkmnbqhd.code.run/character/${id}`
+          // `http://localhost:3000/comics/character/${id}`
         );
         // console.log(response.data);
         setData(response.data);

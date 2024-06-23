@@ -21,8 +21,8 @@ const Characters = ({
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          //   `https://site--backend-leboncoincoin--nksmjkmnbqhd.code.run/characters`
-          `http://localhost:3000/characters?name=${search}&page=${page}`
+          `https://site--marvel-backend--nksmjkmnbqhd.code.run/characters?name=${search}&page=${page}`
+          // `http://localhost:3000/characters?name=${search}&page=${page}`
         );
         // console.log(response.data);
         setData(response.data);
