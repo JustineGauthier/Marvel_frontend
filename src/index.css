@@ -1,6 +1,23 @@
 * {
   box-sizing: border-box;
   font-family: "Marvel", sans-serif;
+  color: #0a4553;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background-color: #d09202;
+}
+
+#root {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 h1,

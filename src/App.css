@@ -1,15 +1,7 @@
-body {
-  margin: 0;
-  background-color: #d09202;
-}
-
-* {
-  color: #0a4553;
-}
-
 main {
   width: 1024px;
   margin: 0 auto;
+  flex-grow: 1;
 }
 
 .fa-heart {
