@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
-import SearchBar from "../../utils/SearchBar";
-import Paging from "../../utils/Paging";
+import List_section from "../../components/sections/list_section/List_section";
+import SearchBar from "../../utils/searchBar/SearchBar";
+import Paging from "../../utils/paging/Paging";
 import "./comics.css";
 
 const Comics = ({
@@ -23,7 +23,7 @@ const Comics = ({
           //   `https://site--backend-leboncoincoin--nksmjkmnbqhd.code.run/comics`
           `http://localhost:3000/comics?title=${search}&page=${page}`
         );
-        console.log(response.data);
+        // console.log(response.data);
         setData(response.data);
         setIsLoading(false);
       } catch (error) {
@@ -34,40 +34,18 @@ const Comics = ({
   }, [search, page]);
 
   return isLoading ? (
-    <p>Loading</p>
+    <main>
+      <p>Loading...</p>
+    </main>
   ) : (
     <main>
       <SearchBar search={search} setSearch={setSearch} setPage={setPage} />
-      <div className="comics-container">
-        {data.paginatedComics.length > 0 ? (
-          data.paginatedComics.map((comic) => {
-            return (
-              <div key={comic._id}>
-                <i
-                  className={
-                    favoritesComicsCookie.some((item) => item._id === comic._id)
-                      ? "fas fa-heart"
-                      : "far fa-heart"
-                  }
-                  onClick={() => {
-                    handleFavoriteToggle(comic, "favoritesComicsCookie");
-                  }}
-                ></i>
-                <Link to={`/comics/${comic._id}`}>
-                  <img
-                    src={`${comic.thumbnail.path}/portrait_fantastic.${comic.thumbnail.extension}`}
-                    alt={`${comic.title} image`}
-                  />
-                  <h2>{comic.title}</h2>
-                  <p>{comic.description}</p>
-                </Link>
-              </div>
-            );
-          })
-        ) : (
-          <p>There are no comics matching your search!</p>
-        )}
-      </div>
+      <List_section
+        data={data}
+        favoritesCookie={favoritesComicsCookie}
+        handleFavoriteToggle={handleFavoriteToggle}
+        type={"comic"}
+      ></List_section>
       <Paging
         page={data.pageNumber}
         totalPages={data.totalPages}

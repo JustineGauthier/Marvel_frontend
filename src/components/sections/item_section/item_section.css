@@ -1,0 +1,56 @@
+.item-section-container {
+  margin: 40px 0;
+}
+
+.item-section-content {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.item-section-image-container {
+  position: relative;
+  img {
+    border: 3px solid #0a4553;
+    /* border: 3px solid white; */
+    border-radius: 5px;
+  }
+}
+
+.item-list-infos {
+  width: 50%;
+  h2 {
+    font-size: 3rem;
+  }
+  p {
+    font-size: 1.3rem;
+    color: white;
+  }
+}
+
+.item-comics {
+  h3 {
+    font-size: 2rem;
+  }
+  ul {
+    /* display: flex;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    -ms-overflow-style: none; IE and Edge
+    scrollbar-width: none; Firefox 
+    ul::-webkit-scrollbar {
+      display: none; Hide scrollbar for Chrome, Safari and Opera
+    }  */
+    li {
+      display: flex;
+      gap: 15px;
+      margin: 20px 0;
+      /* flex-shrink: 0; */
+      h4 {
+        font-size: 1.3rem;
+      }
+    }
+  }
+}

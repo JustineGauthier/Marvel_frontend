@@ -1,20 +1,10 @@
-.favorites-container {
-  margin-bottom: 40px;
-  h2 {
-    font-size: 2.5rem;
-  }
-  .no-favorites {
-    font-size: 1.5rem;
-  }
-}
-
-.favorites-collection-container {
+.items-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
 }
 
-.favorites-card {
+.item-list-card {
   background-color: white;
   border-radius: 5px;
   width: 216px;
@@ -27,16 +17,16 @@
   }
 }
 
-.favorites-card:hover {
+.item-list-card:hover {
   box-shadow: 4px 4px 3px 2px rgba(0, 0, 0, 0.3);
 }
 
-.favorites-card-content {
+.item-list-card-content {
   display: flex;
   justify-content: center;
   flex-direction: column;
 }
 
-.favorites-card-infos {
+.item-list-card-infos {
   padding: 0 20px;
 }

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Cookies from "js-cookie";
+import "./favorites.css";
 
 const Favorites = ({
   favoritesCharactersCookie,
@@ -15,12 +16,16 @@ const Favorites = ({
       try {
         const favoritesCharacters = Cookies.get("favoritesCharactersCookie");
         if (favoritesCharacters) {
-          setCharactersData(JSON.parse(favoritesCharacters));
+          const parsedCharacters = JSON.parse(favoritesCharacters);
+          parsedCharacters.sort((a, b) => a.name.localeCompare(b.name));
+          setCharactersData(parsedCharacters);
         }
 
         const favoritesComics = Cookies.get("favoritesComicsCookie");
         if (favoritesComics) {
-          setComicsData(JSON.parse(favoritesComics));
+          const parsedComics = JSON.parse(favoritesComics);
+          parsedComics.sort((a, b) => a.title.localeCompare(b.title));
+          setComicsData(parsedComics);
         }
       } catch (error) {
         console.log(error);
@@ -30,13 +35,13 @@ const Favorites = ({
   }, [handleFavoriteToggle]);
 
   return (
-    <main>
-      <div className="characters-container">
-        <h2>Characters :</h2>
+    <main className="favorites-container">
+      <h2>Characters :</h2>
+      <div className="favorites-collection-container">
         {charactersData.length > 0 ? (
           charactersData.map((character) => {
             return (
-              <div key={character._id}>
+              <div key={character._id} className="favorites-card">
                 <i
                   className={
                     favoritesCharactersCookie.some(
@@ -52,28 +57,35 @@ const Favorites = ({
                     );
                   }}
                 ></i>
-                <Link to={`/characters/${character._id}`}>
+                <Link
+                  to={`/characters/${character._id}`}
+                  className="favorites-card-content"
+                >
                   <img
                     src={`${character.thumbnail.path}/portrait_uncanny.${character.thumbnail.extension}`}
                     alt={`${character.name} image`}
                   />
-                  <h2>{character.name}</h2>
-                  <p>{character.description}</p>
+                  <div className="favorites-card-infos">
+                    <h2>{character.name}</h2>
+                    <p>{character.description}</p>
+                  </div>
                 </Link>
               </div>
             );
           })
         ) : (
-          <p>You don't have any favorite characters !</p>
+          <p className="no-favorites">
+            You don't have any favorite characters !
+          </p>
         )}
       </div>
 
-      <div className="comics-container">
-        <h2>Comics :</h2>
+      <h2>Comics :</h2>
+      <div className="favorites-collection-container">
         {comicsData.length > 0 ? (
           comicsData.map((comic) => {
             return (
-              <div key={comic._id}>
+              <div key={comic._id} className="favorites-card">
                 <i
                   className={
                     favoritesComicsCookie.some((item) => item._id === comic._id)
@@ -84,11 +96,15 @@ const Favorites = ({
                     handleFavoriteToggle(comic, "favoritesComicsCookie");
                   }}
                 ></i>
-                <Link to={`/comics/${comic._id}`}>
+                <Link
+                  to={`/comics/${comic._id}`}
+                  className="favorites-card-content"
+                >
                   <img
                     src={`${comic.thumbnail.path}/portrait_uncanny.${comic.thumbnail.extension}`}
                     alt={`${comic.name} image`}
                   />
+                  <div className="favorites-card-infos"></div>
                   <h2>{comic.name}</h2>
                   <p>{comic.description}</p>
                 </Link>
@@ -96,7 +112,7 @@ const Favorites = ({
             );
           })
         ) : (
-          <p>You don't have any favorite comics !</p>
+          <p className="no-favorites">You don't have any favorite comics !</p>
         )}
       </div>
     </main>

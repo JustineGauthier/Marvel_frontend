@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import Item_section from "../../components/sections/item_section/Item_section";
 import "./comic.css";
 
 const Comic = ({ favoritesComicsCookie, handleFavoriteToggle }) => {
@@ -29,26 +30,12 @@ const Comic = ({ favoritesComicsCookie, handleFavoriteToggle }) => {
     <p>Loading</p>
   ) : (
     <main>
-      <div className="comic-container">
-        <div>
-          <i
-            className={
-              favoritesComicsCookie.some((item) => item._id === data._id)
-                ? "fas fa-heart"
-                : "far fa-heart"
-            }
-            onClick={() => {
-              handleFavoriteToggle(data, "favoritesComicsCookie");
-            }}
-          ></i>
-          <img
-            src={`${data.thumbnail.path}/portrait_uncanny.${data.thumbnail.extension}`}
-            alt={`${data.title} image`}
-          />
-          <h2>{data.title}</h2>
-          <p>{data.description}</p>
-        </div>
-      </div>
+      <Item_section
+        favoritesCookie={favoritesComicsCookie}
+        data={data}
+        handleFavoriteToggle={handleFavoriteToggle}
+        type={"comic"}
+      ></Item_section>
     </main>
   );
 };

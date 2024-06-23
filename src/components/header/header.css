@@ -1,0 +1,26 @@
+.navBar {
+  background-color: white;
+  padding: 20px 0;
+  border-bottom: 10px solid #0a4553;
+  font-weight: bold;
+  font-size: 1.8rem;
+}
+
+.navBar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 1024px;
+  margin: auto;
+  img:hover {
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.menu {
+  display: flex;
+  gap: 30px;
+  a:hover {
+    color: #ed1d24;
+  }
+}
