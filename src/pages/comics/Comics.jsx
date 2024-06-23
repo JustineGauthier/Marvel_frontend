@@ -39,30 +39,34 @@ const Comics = ({
     <main>
       <SearchBar search={search} setSearch={setSearch} setPage={setPage} />
       <div className="comics-container">
-        {data.paginatedComics.map((comic) => {
-          return (
-            <div key={comic._id}>
-              <i
-                className={
-                  favoritesComicsCookie.some((item) => item._id === comic._id)
-                    ? "fas fa-heart"
-                    : "far fa-heart"
-                }
-                onClick={() => {
-                  handleFavoriteToggle(comic, "favoritesComicsCookie");
-                }}
-              ></i>
-              <Link to={`/comics/${comic._id}`}>
-                <img
-                  src={`${comic.thumbnail.path}/portrait_fantastic.${comic.thumbnail.extension}`}
-                  alt={`${comic.title} image`}
-                />
-                <h2>{comic.title}</h2>
-                <p>{comic.description}</p>
-              </Link>
-            </div>
-          );
-        })}
+        {data.paginatedComics.length > 0 ? (
+          data.paginatedComics.map((comic) => {
+            return (
+              <div key={comic._id}>
+                <i
+                  className={
+                    favoritesComicsCookie.some((item) => item._id === comic._id)
+                      ? "fas fa-heart"
+                      : "far fa-heart"
+                  }
+                  onClick={() => {
+                    handleFavoriteToggle(comic, "favoritesComicsCookie");
+                  }}
+                ></i>
+                <Link to={`/comics/${comic._id}`}>
+                  <img
+                    src={`${comic.thumbnail.path}/portrait_fantastic.${comic.thumbnail.extension}`}
+                    alt={`${comic.title} image`}
+                  />
+                  <h2>{comic.title}</h2>
+                  <p>{comic.description}</p>
+                </Link>
+              </div>
+            );
+          })
+        ) : (
+          <p>There are no comics matching your search!</p>
+        )}
       </div>
       <Paging
         page={data.pageNumber}

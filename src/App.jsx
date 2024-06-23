@@ -33,7 +33,9 @@ function App() {
         ? favoritesCharactersCookie.filter((item) => item._id !== data._id)
         : [...favoritesCharactersCookie, data];
 
-      Cookies.set(cookieName, JSON.stringify(updatedFavorites));
+      Cookies.set(cookieName, JSON.stringify(updatedFavorites), {
+        expires: 15,
+      });
       setFavoritesCharactersCookie(updatedFavorites);
     }
     if (cookieName === "favoritesComicsCookie") {
@@ -44,7 +46,9 @@ function App() {
         ? favoritesComicsCookie.filter((item) => item._id !== data._id)
         : [...favoritesComicsCookie, data];
 
-      Cookies.set(cookieName, JSON.stringify(updatedFavorites));
+      Cookies.set(cookieName, JSON.stringify(updatedFavorites), {
+        expires: 15,
+      });
       setFavoritesComicsCookie(updatedFavorites);
     }
   };

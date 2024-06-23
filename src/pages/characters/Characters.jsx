@@ -39,32 +39,39 @@ const Characters = ({
     <main>
       <SearchBar search={search} setSearch={setSearch} setPage={setPage} />
       <div className="characters-container">
-        {data.paginatedCharacters.map((character) => {
-          return (
-            <div key={character._id}>
-              <i
-                className={
-                  favoritesCharactersCookie.some(
-                    (item) => item._id === character._id
-                  )
-                    ? "fas fa-heart"
-                    : "far fa-heart"
-                }
-                onClick={() => {
-                  handleFavoriteToggle(character, "favoritesCharactersCookie");
-                }}
-              ></i>
-              <Link to={`/characters/${character._id}`}>
-                <img
-                  src={`${character.thumbnail.path}/portrait_uncanny.${character.thumbnail.extension}`}
-                  alt={`${character.name} image`}
-                />
-                <h2>{character.name}</h2>
-                <p>{character.description}</p>
-              </Link>
-            </div>
-          );
-        })}
+        {data.paginatedCharacters.length > 0 ? (
+          data.paginatedCharacters.map((character) => {
+            return (
+              <div key={character._id}>
+                <i
+                  className={
+                    favoritesCharactersCookie.some(
+                      (item) => item._id === character._id
+                    )
+                      ? "fas fa-heart"
+                      : "far fa-heart"
+                  }
+                  onClick={() => {
+                    handleFavoriteToggle(
+                      character,
+                      "favoritesCharactersCookie"
+                    );
+                  }}
+                ></i>
+                <Link to={`/characters/${character._id}`}>
+                  <img
+                    src={`${character.thumbnail.path}/portrait_uncanny.${character.thumbnail.extension}`}
+                    alt={`${character.name} image`}
+                  />
+                  <h2>{character.name}</h2>
+                  <p>{character.description}</p>
+                </Link>
+              </div>
+            );
+          })
+        ) : (
+          <p>There are no characters matching your search!</p>
+        )}
       </div>
       <Paging
         page={data.pageNumber}
