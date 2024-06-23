@@ -1,11 +1,16 @@
 const Paging = ({ page, totalPages, setPage }) => {
+  const handlePageChange = (newPage) => {
+    setPage(newPage);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <>
       {page > 1 && (
         <i
           className="fa-solid fa-caret-left"
           onClick={() => {
-            setPage(page - 1);
+            handlePageChange(page - 1);
           }}
         ></i>
       )}
@@ -18,7 +23,7 @@ const Paging = ({ page, totalPages, setPage }) => {
         <i
           className="fa-solid fa-caret-right"
           onClick={() => {
-            setPage(page + 1);
+            handlePageChange(page + 1);
           }}
         ></i>
       )}

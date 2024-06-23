@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+
 import SearchBar from "../../utils/SearchBar";
+import List_section from "../../components/sections/list_section/List_section";
 import Paging from "../../utils/Paging";
 import "./characters.css";
 
@@ -38,41 +39,12 @@ const Characters = ({
   ) : (
     <main>
       <SearchBar search={search} setSearch={setSearch} setPage={setPage} />
-      <div className="characters-container">
-        {data.paginatedCharacters.length > 0 ? (
-          data.paginatedCharacters.map((character) => {
-            return (
-              <div key={character._id}>
-                <i
-                  className={
-                    favoritesCharactersCookie.some(
-                      (item) => item._id === character._id
-                    )
-                      ? "fas fa-heart"
-                      : "far fa-heart"
-                  }
-                  onClick={() => {
-                    handleFavoriteToggle(
-                      character,
-                      "favoritesCharactersCookie"
-                    );
-                  }}
-                ></i>
-                <Link to={`/characters/${character._id}`}>
-                  <img
-                    src={`${character.thumbnail.path}/portrait_uncanny.${character.thumbnail.extension}`}
-                    alt={`${character.name} image`}
-                  />
-                  <h2>{character.name}</h2>
-                  <p>{character.description}</p>
-                </Link>
-              </div>
-            );
-          })
-        ) : (
-          <p>There are no characters matching your search!</p>
-        )}
-      </div>
+      <List_section
+        data={data}
+        favoritesCookie={favoritesCharactersCookie}
+        handleFavoriteToggle={handleFavoriteToggle}
+        type={"character"}
+      ></List_section>
       <Paging
         page={data.pageNumber}
         totalPages={data.totalPages}

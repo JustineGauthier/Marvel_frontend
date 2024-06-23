@@ -15,12 +15,16 @@ const Favorites = ({
       try {
         const favoritesCharacters = Cookies.get("favoritesCharactersCookie");
         if (favoritesCharacters) {
-          setCharactersData(JSON.parse(favoritesCharacters));
+          const parsedCharacters = JSON.parse(favoritesCharacters);
+          parsedCharacters.sort((a, b) => a.name.localeCompare(b.name));
+          setCharactersData(parsedCharacters);
         }
 
         const favoritesComics = Cookies.get("favoritesComicsCookie");
         if (favoritesComics) {
-          setComicsData(JSON.parse(favoritesComics));
+          const parsedComics = JSON.parse(favoritesComics);
+          parsedComics.sort((a, b) => a.title.localeCompare(b.title));
+          setComicsData(parsedComics);
         }
       } catch (error) {
         console.log(error);
