@@ -1,3 +1,5 @@
+import "./searchBar.css";
+
 const SearchBar = ({ search, setSearch, setPage }) => {
   return (
     <input

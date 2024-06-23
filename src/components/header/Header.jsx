@@ -5,38 +5,41 @@ import "./header.css";
 const Header = ({ setSearch, setPage }) => {
   return (
     <div className="navBar">
-      <Link to="/">
-        <img src="/img/marvel-logo.svg" alt="Marvel logo" />
-      </Link>
+      <div className="navBar-container">
+        <Link to="/">
+          <img src="/img/marvel-logo.svg" alt="Marvel logo" />
+        </Link>
 
-      <Link
-        to="/"
-        onClick={() => {
-          setPage(1);
-          setSearch("");
-        }}
-      >
-        Characters
-      </Link>
-      <Link
-        to="/comics"
-        onClick={() => {
-          setPage(1);
-          setSearch("");
-        }}
-      >
-        Comics
-      </Link>
-      <Link
-        to="/favorites"
-        onClick={() => {
-          setPage(1);
-          setSearch("");
-        }}
-      >
-        <i className="fas fa-heart"></i>
-        <i className="far fa-heart"></i>
-      </Link>
+        <div className="menu">
+          <Link
+            to="/"
+            onClick={() => {
+              setPage(1);
+              setSearch("");
+            }}
+          >
+            Characters
+          </Link>
+          <Link
+            to="/comics"
+            onClick={() => {
+              setPage(1);
+              setSearch("");
+            }}
+          >
+            Comics
+          </Link>
+          <Link
+            to="/favorites"
+            onClick={() => {
+              setPage(1);
+              setSearch("");
+            }}
+          >
+            Favorites
+          </Link>
+        </div>
+      </div>
     </div>
   );
 };

@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import "./list_section.css";
 
 const List_section = ({
   data,
@@ -13,7 +14,7 @@ const List_section = ({
       {data.paginatedData.length > 0 ? (
         data.paginatedData.map((item) => {
           return (
-            <div key={item._id}>
+            <div className="item-list-card" key={item._id}>
               <i
                 className={
                   favoritesCookie.some(
@@ -29,13 +30,18 @@ const List_section = ({
                   );
                 }}
               ></i>
-              <Link to={`/${type}s/${item._id}`}>
+              <Link
+                to={`/${type}s/${item._id}`}
+                className="item-list-card-content"
+              >
                 <img
-                  src={`${item.thumbnail.path}/portrait_uncanny.${item.thumbnail.extension}`}
+                  src={`${item.thumbnail.path}/portrait_incredible.${item.thumbnail.extension}`}
                   alt={`${item.name} image`}
                 />
-                <h2>{item.name}</h2>
-                <p>{item.description}</p>
+                <div className="item-list-card-infos">
+                  <h2>{item.name}</h2>
+                  <p>{item.description}</p>
+                </div>
               </Link>
             </div>
           );

@@ -1,0 +1,20 @@
+.footer {
+  padding-left: 20px;
+  display: flex;
+  align-items: center;
+
+  border-top: 10px solid #0a4553;
+  background-color: white;
+  height: 80px;
+  a,
+  p {
+    margin: 0;
+  }
+  a:hover {
+    color: #ed1d24;
+  }
+}
+
+.footer > *:not(:last-child) {
+  margin-left: 5px;
+}

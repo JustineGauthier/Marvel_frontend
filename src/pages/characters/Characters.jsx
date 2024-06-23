@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-import SearchBar from "../../utils/SearchBar";
+import SearchBar from "../../utils/searchBar/SearchBar";
 import List_section from "../../components/sections/list_section/List_section";
-import Paging from "../../utils/Paging";
+import Paging from "../../utils/paging/Paging";
 import "./characters.css";
 
 const Characters = ({
@@ -35,7 +35,9 @@ const Characters = ({
   }, [search, page]);
 
   return isLoading ? (
-    <p>Loading</p>
+    <main>
+      <p>Loading...</p>
+    </main>
   ) : (
     <main>
       <SearchBar search={search} setSearch={setSearch} setPage={setPage} />
