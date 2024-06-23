@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import "./comic.css";
 
-const Comic = () => {
+const Comic = ({ favoritesComicsCookie, handleFavoriteToggle }) => {
   const { id } = useParams();
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
@@ -15,7 +15,7 @@ const Comic = () => {
           //   "https://site--backend-leboncoincoin--nksmjkmnbqhd.code.run/offers"
           `http://localhost:3000/comics/${id}`
         );
-        console.log(response.data);
+        // console.log(response.data);
         setData(response.data);
         setIsLoading(false);
       } catch (error) {
@@ -31,6 +31,16 @@ const Comic = () => {
     <main>
       <div className="comic-container">
         <div>
+          <i
+            className={
+              favoritesComicsCookie.some((item) => item._id === data._id)
+                ? "fas fa-heart"
+                : "far fa-heart"
+            }
+            onClick={() => {
+              handleFavoriteToggle(data, "favoritesComicsCookie");
+            }}
+          ></i>
           <img
             src={`${data.thumbnail.path}/portrait_uncanny.${data.thumbnail.extension}`}
             alt={`${data.title} image`}

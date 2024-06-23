@@ -1,13 +1,20 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import SearchBar from "../../utils/SearchBar";
 import Paging from "../../utils/Paging";
 import "./characters.css";
 
-const Characters = ({ search }) => {
+const Characters = ({
+  search,
+  setSearch,
+  page,
+  setPage,
+  favoritesCharactersCookie,
+  handleFavoriteToggle,
+}) => {
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
-  const [page, setPage] = useState(1);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -16,9 +23,8 @@ const Characters = ({ search }) => {
           //   `https://site--backend-leboncoincoin--nksmjkmnbqhd.code.run/characters`
           `http://localhost:3000/characters?name=${search}&page=${page}`
         );
-        console.log(response.data);
+        // console.log(response.data);
         setData(response.data);
-        setPage(response.data.pageNumber);
         setIsLoading(false);
       } catch (error) {
         console.log(error);
@@ -31,21 +37,41 @@ const Characters = ({ search }) => {
     <p>Loading</p>
   ) : (
     <main>
+      <SearchBar search={search} setSearch={setSearch} setPage={setPage} />
       <div className="characters-container">
-        {data.paginatedCharacters.map((character) => {
-          return (
-            <Link to={`/characters/${character._id}`} key={character._id}>
-              <div>
-                <img
-                  src={`${character.thumbnail.path}/portrait_uncanny.${character.thumbnail.extension}`}
-                  alt={`${character.name} image`}
-                />
-                <h2>{character.name}</h2>
-                <p>{character.description}</p>
+        {data.paginatedCharacters.length > 0 ? (
+          data.paginatedCharacters.map((character) => {
+            return (
+              <div key={character._id}>
+                <i
+                  className={
+                    favoritesCharactersCookie.some(
+                      (item) => item._id === character._id
+                    )
+                      ? "fas fa-heart"
+                      : "far fa-heart"
+                  }
+                  onClick={() => {
+                    handleFavoriteToggle(
+                      character,
+                      "favoritesCharactersCookie"
+                    );
+                  }}
+                ></i>
+                <Link to={`/characters/${character._id}`}>
+                  <img
+                    src={`${character.thumbnail.path}/portrait_uncanny.${character.thumbnail.extension}`}
+                    alt={`${character.name} image`}
+                  />
+                  <h2>{character.name}</h2>
+                  <p>{character.description}</p>
+                </Link>
               </div>
-            </Link>
-          );
-        })}
+            );
+          })
+        ) : (
+          <p>There are no characters matching your search!</p>
+        )}
       </div>
       <Paging
         page={data.pageNumber}
